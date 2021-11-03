@@ -7,7 +7,6 @@ import (
 	"syscall"
 )
 
-// go run main.go run <cmd> <args>
 func main() {
 	switch os.Args[1] {
 	case "run":
@@ -32,7 +31,7 @@ func run() {
 
 	os.Clearenv()
 	cmd.Env = []string{
-		"PATH=/bin:/usr/bin",
+		"PATH=/bin:/sbin:/usr/bin:/usr/sbin",
 		"PS1=[\\u@\\h \\w]\\$ ",
 	}
 
