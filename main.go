@@ -86,7 +86,6 @@ func child() {
 	must(syscall.Mount("proc", "proc", "proc", 0, ""))
 
 	must(cmd.Run())
-
 	must(syscall.Unmount("proc", 0))
 }
 

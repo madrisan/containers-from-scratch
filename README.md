@@ -20,5 +20,6 @@ tar xf /tmp/alpine_3.tar -C alpine
 ```
 Now run the Go code:
 ```
-go run main.go run /bin/sh
+go build -o container
+./container run /bin/sh
 ```
