@@ -81,12 +81,19 @@ func child() {
 	cmd.Stderr = os.Stderr
 
 	must(syscall.Sethostname([]byte("container")))
+
 	must(syscall.Chroot("./alpinefs"))
 	must(os.Chdir("/"))
-	must(syscall.Mount("proc", "proc", "proc", 0, ""))
+
+	must(syscall.Mount(
+		"proc",
+		"/proc",
+		"proc",
+		uintptr(syscall.MS_NOEXEC|syscall.MS_NOSUID|syscall.MS_NODEV),
+		""))
+	defer syscall.Unmount("/proc", 0)
 
 	must(cmd.Run())
-	must(syscall.Unmount("proc", 0))
 }
 
 func must(err error) {
